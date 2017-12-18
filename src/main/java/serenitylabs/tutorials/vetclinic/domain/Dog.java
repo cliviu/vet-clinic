@@ -1,11 +1,15 @@
 package serenitylabs.tutorials.vetclinic.domain;
 
+import com.google.common.collect.ImmutableList;
+
+import java.util.List;
+
 public class Dog {
     private final String name;
     private final String breed;
-    private final String colour;
+    private final List<String> colour;
 
-    public Dog(String name, String breed, String colour) {
+    public Dog(String name, String breed, List<String> colour) {
 
         this.name = name;
         this.breed = breed;
@@ -20,7 +24,7 @@ public class Dog {
         return breed;
     }
 
-    public String getColour() {
+    public List<String> getColour() {
         return colour;
     }
 
@@ -41,8 +45,15 @@ public class Dog {
             return this;
         }
 
-        public Dog andOfColour(String colour) {
-            return new Dog(name, breed, colour);
+        public Dog andOfColour(String... colour) {
+            return new Dog(name, breed, ImmutableList.copyOf(colour));
         }
+
+
+    }
+
+    public String toString(){
+        return name + " the " + (colour + " " + breed).toLowerCase();
+
     }
 }
