@@ -2,7 +2,7 @@ package serenitylabs.tutorials.vetclinic;
 
 import com.google.common.base.Objects;
 import com.google.common.collect.Lists;
-import serenitylabs.tutorials.vetclinic.collections.katas.PetFood;
+import serenitylabs.tutorials.vetclinic.models.PetSatisfactionEvaluator;
 
 import java.util.List;
 
@@ -36,27 +36,11 @@ public class Pet {
 
     public boolean isWellFed() {
 
-        double totalEaten = 0.0;
-
-        for(Meal meal : mealsGiven) {
-            if ((breed == Breed.Cat) && (meal.getFoodBrand() == PetFood.KittyKat)) {
-                totalEaten = totalEaten + meal.getAmountInGrams();
-            } else if ((breed == Breed.Dog) && (meal.getFoodBrand() == PetFood.FidosFood)) {
-                totalEaten = totalEaten + meal.getAmountInGrams();
-            }
-        }
-        double amountNeeded = 0.0;
-        if (breed == Breed.Cat) {
-            amountNeeded = getWeightInKilos() * 10;
-        } else if (breed == Breed.Dog) {
-            amountNeeded = getWeightInKilos() * 20;
-        }
-
-        return (totalEaten >= amountNeeded);
+        return new PetSatisfactionEvaluator().isWellFed(this);
     }
 
-    public void feed(double amountInGrams, PetFood foodBrand) {
-        mealsGiven.add(new Meal(amountInGrams, foodBrand));
+    public void eat(Meal meal) {
+        mealsGiven.add(meal);
     }
 
     public static class PetBuilder {
