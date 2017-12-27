@@ -6,7 +6,7 @@ import com.google.common.collect.ImmutableList;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Dog {
+public class Dog extends Animal {
     private final String name;
     private final String breed;
     private final List<String> colour;
@@ -16,6 +16,11 @@ public class Dog {
         this.name = name;
         this.breed = breed;
         this.colour = colour;
+    }
+
+    @Override
+    public String complaint() {
+        return "Grrrr";
     }
 
     @Override
